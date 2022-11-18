@@ -5,16 +5,15 @@ const testCommon = require('./common')
 
 let db
 
-// TODO (v2)
-false && test('highWaterMarkBytes setup', async function (t) {
+test('highWaterMarkBytes setup', async function (t) {
   db = testCommon.factory()
+  await db.open()
 
   // Write 8 bytes
   return db.batch().put('a', '0').put('b', '1').put('c', '2').put('d', '3').write()
 })
 
-// TODO (v2)
-false && test('highWaterMarkBytes limits byte length of nextv() entries', async function (t) {
+test('highWaterMarkBytes limits byte length of nextv() entries', async function (t) {
   const hwm = async (highWaterMarkBytes) => {
     const it = db.iterator({ highWaterMarkBytes })
     const entries = await it.nextv(1e3)
@@ -28,8 +27,7 @@ false && test('highWaterMarkBytes limits byte length of nextv() entries', async 
   t.same(await hwm(2), [['a', '0'], ['b', '1']], 'highWaterMarkBytes must be exceeded, not met')
 })
 
-// TODO (v2)
-false && test('highWaterMarkBytes limits byte length of internal next() cache', async function (t) {
+test('highWaterMarkBytes limits byte length of internal next() cache', async function (t) {
   const hwm = async (highWaterMarkBytes) => {
     const it = db.iterator({ highWaterMarkBytes })
 
@@ -51,8 +49,7 @@ false && test('highWaterMarkBytes limits byte length of internal next() cache', 
   t.is(await hwm(9), 6, 'double-check that previous test did apply a limit')
 })
 
-// TODO (v2)
-false && test('highWaterMarkBytes does not affect byte length of all() entries', async function (t) {
+test('highWaterMarkBytes does not affect byte length of all() entries', async function (t) {
   const hwm = async (highWaterMarkBytes) => {
     // Note: setting hwm does make all() slower, as it uses nextv() atm
     return db.iterator({ highWaterMarkBytes }).all()
@@ -62,7 +59,6 @@ false && test('highWaterMarkBytes does not affect byte length of all() entries',
   t.same(await hwm(1), [['a', '0'], ['b', '1'], ['c', '2'], ['d', '3']])
 })
 
-// TODO (v2)
-false && test('highWaterMarkBytes teardown', async function (t) {
+test('highWaterMarkBytes teardown', async function (t) {
   return db.close()
 })

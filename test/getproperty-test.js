@@ -5,14 +5,12 @@ const testCommon = require('./common')
 
 let db
 
-// TODO (v2)
-false && test('setUp db', function (t) {
+test('getProperty() setup', async function (t) {
   db = testCommon.factory()
-  db.open(t.end.bind(t))
+  return db.open()
 })
 
-// TODO (v2)
-false && test('test argument-less getProperty() throws', function (t) {
+test('argument-less getProperty() throws', function (t) {
   t.throws(db.getProperty.bind(db), {
     name: 'TypeError',
     message: "The first argument 'property' must be a string"
@@ -20,8 +18,7 @@ false && test('test argument-less getProperty() throws', function (t) {
   t.end()
 })
 
-// TODO (v2)
-false && test('test non-string getProperty() throws', function (t) {
+test('non-string getProperty() throws', function (t) {
   t.throws(db.getProperty.bind(db, {}), {
     name: 'TypeError',
     message: "The first argument 'property' must be a string"
@@ -29,15 +26,13 @@ false && test('test non-string getProperty() throws', function (t) {
   t.end()
 })
 
-// TODO (v2)
-false && test('test invalid getProperty() returns empty string', function (t) {
+test('invalid getProperty() returns empty string', function (t) {
   t.equal(db.getProperty('foo'), '', 'invalid property')
   t.equal(db.getProperty('leveldb.foo'), '', 'invalid leveldb.* property')
   t.end()
 })
 
-// TODO (v2)
-false && test('test invalid getProperty("leveldb.num-files-at-levelN") returns numbers', function (t) {
+test('invalid getProperty("leveldb.num-files-at-levelN") returns numbers', function (t) {
   for (let i = 0; i < 7; i++) {
     t.equal(db.getProperty('leveldb.num-files-at-level' + i),
       '0', '"leveldb.num-files-at-levelN" === "0"')
@@ -45,14 +40,12 @@ false && test('test invalid getProperty("leveldb.num-files-at-levelN") returns n
   t.end()
 })
 
-// TODO (v2)
-false && test('test invalid getProperty("leveldb.stats")', function (t) {
+test('invalid getProperty("leveldb.stats")', function (t) {
   t.ok(db.getProperty('leveldb.stats').split('\n').length > 3, 'leveldb.stats has > 3 newlines')
   t.end()
 })
 
-// TODO (v2)
-false && test('test invalid getProperty("leveldb.sstables")', function (t) {
+test('invalid getProperty("leveldb.sstables")', function (t) {
   const expected = [0, 1, 2, 3, 4, 5, 6].map(function (l) {
     return '--- level ' + l + ' ---'
   }).join('\n') + '\n'
@@ -60,13 +53,11 @@ false && test('test invalid getProperty("leveldb.sstables")', function (t) {
   t.end()
 })
 
-// TODO (v2)
-false && test('tearDown', function (t) {
-  db.close(t.end.bind(t))
+test('getProperty() teardown', async function (t) {
+  return db.close()
 })
 
-// TODO (v2)
-false && test('getProperty() throws if db is closed', function (t) {
+test('getProperty() throws if db is closed', function (t) {
   t.throws(() => db.getProperty('leveldb.stats'), {
     code: 'LEVEL_DATABASE_NOT_OPEN'
   })

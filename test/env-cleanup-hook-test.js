@@ -15,11 +15,12 @@ addTest(['create', 'open', 'close'])
 addTest(['create', 'open-error'])
 
 function addTest (steps) {
-  // TODO (v2)
-  false && test(`cleanup on environment exit (${steps.join(', ')})`, function (t) {
+  test(`cleanup on environment exit (${steps.join(', ')})`, function (t) {
     t.plan(3)
 
-    const child = fork(path.join(__dirname, 'env-cleanup-hook.js'), steps)
+    const child = fork(path.join(__dirname, 'env-cleanup-hook.js'), steps, {
+      execArgv: [...process.execArgv, '--unhandled-rejections=strict']
+    })
 
     child.on('message', function (m) {
       t.is(m, steps[steps.length - 1], `got to step: ${m}`)
