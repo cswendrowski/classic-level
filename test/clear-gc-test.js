@@ -12,7 +12,8 @@ for (let i = 0; i < 1e3; i++) {
   })
 }
 
-test('db without ref does not get GCed while clear() is in progress', function (t) {
+// TODO (v2)
+false && test('db without ref does not get GCed while clear() is in progress', function (t) {
   t.plan(4)
 
   let db = testCommon.factory()

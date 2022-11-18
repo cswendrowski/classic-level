@@ -13,6 +13,7 @@ if (process.argv[2] === 'run') {
   const db = testCommon.factory()
   let depth = 0
 
+  // TODO (v2)
   db.open(function () {
     function recurse () {
       db.iterator({ gte: '0' })

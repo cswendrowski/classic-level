@@ -5,14 +5,16 @@ const testCommon = require('./common')
 
 let db
 
-test('highWaterMarkBytes setup', async function (t) {
+// TODO (v2)
+false && test('highWaterMarkBytes setup', async function (t) {
   db = testCommon.factory()
 
   // Write 8 bytes
   return db.batch().put('a', '0').put('b', '1').put('c', '2').put('d', '3').write()
 })
 
-test('highWaterMarkBytes limits byte length of nextv() entries', async function (t) {
+// TODO (v2)
+false && test('highWaterMarkBytes limits byte length of nextv() entries', async function (t) {
   const hwm = async (highWaterMarkBytes) => {
     const it = db.iterator({ highWaterMarkBytes })
     const entries = await it.nextv(1e3)
@@ -26,7 +28,8 @@ test('highWaterMarkBytes limits byte length of nextv() entries', async function 
   t.same(await hwm(2), [['a', '0'], ['b', '1']], 'highWaterMarkBytes must be exceeded, not met')
 })
 
-test('highWaterMarkBytes limits byte length of internal next() cache', async function (t) {
+// TODO (v2)
+false && test('highWaterMarkBytes limits byte length of internal next() cache', async function (t) {
   const hwm = async (highWaterMarkBytes) => {
     const it = db.iterator({ highWaterMarkBytes })
 
@@ -48,7 +51,8 @@ test('highWaterMarkBytes limits byte length of internal next() cache', async fun
   t.is(await hwm(9), 6, 'double-check that previous test did apply a limit')
 })
 
-test('highWaterMarkBytes does not affect byte length of all() entries', async function (t) {
+// TODO (v2)
+false && test('highWaterMarkBytes does not affect byte length of all() entries', async function (t) {
   const hwm = async (highWaterMarkBytes) => {
     // Note: setting hwm does make all() slower, as it uses nextv() atm
     return db.iterator({ highWaterMarkBytes }).all()
@@ -58,6 +62,7 @@ test('highWaterMarkBytes does not affect byte length of all() entries', async fu
   t.same(await hwm(1), [['a', '0'], ['b', '1'], ['c', '2'], ['d', '3']])
 })
 
-test('highWaterMarkBytes teardown', async function (t) {
+// TODO (v2)
+false && test('highWaterMarkBytes teardown', async function (t) {
   return db.close()
 })

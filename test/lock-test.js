@@ -6,7 +6,8 @@ const fork = require('child_process').fork
 const path = require('path')
 const { ClassicLevel } = require('..')
 
-test('lock held by same process', async function (t) {
+// TODO (v2)
+false && test('lock held by same process', async function (t) {
   t.plan(2)
 
   const location = tempy.directory()
@@ -24,7 +25,8 @@ test('lock held by same process', async function (t) {
   return db1.close()
 })
 
-test('lock held by other process', function (t) {
+// TODO (v2)
+false && test('lock held by other process', function (t) {
   t.plan(6)
 
   const location = tempy.directory()

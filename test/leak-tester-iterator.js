@@ -2,6 +2,9 @@
 
 const db = require('./common').factory()
 
+// TODO (v2)
+process.exit(123)
+
 let count = 0
 let rssBase
 

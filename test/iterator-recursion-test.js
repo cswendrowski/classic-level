@@ -54,7 +54,8 @@ test.skip('try to create an iterator with a blown stack', function (t) {
   t.end()
 })
 
-test('setUp db', function (t) {
+// TODO (v2)
+false && test('setUp db', function (t) {
   db = testCommon.factory()
   db.open(function (err) {
     t.error(err)
@@ -62,7 +63,8 @@ test('setUp db', function (t) {
   })
 })
 
-test('iterate over a large iterator with a large watermark', function (t) {
+// TODO (v2)
+false && test('iterate over a large iterator with a large watermark', function (t) {
   const iterator = db.iterator({
     highWaterMarkBytes: 10000000
   })
@@ -81,6 +83,7 @@ test('iterate over a large iterator with a large watermark', function (t) {
   read()
 })
 
-test('tearDown', function (t) {
+// TODO (v2)
+false && test('tearDown', function (t) {
   db.close(t.end.bind(t))
 })

@@ -10,7 +10,8 @@ const operations = []
 function testPending (name, expectedCount, fn) {
   operations.push(fn)
 
-  test(`close() waits for pending ${name}`, function (t) {
+  // TODO (v2)
+  false && test(`close() waits for pending ${name}`, function (t) {
     const db = testCommon.factory()
     let count = 0
 

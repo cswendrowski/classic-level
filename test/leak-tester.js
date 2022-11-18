@@ -5,6 +5,9 @@ const BUFFERS = false
 const testCommon = require('./common')
 const crypto = require('crypto')
 
+// TODO (v2)
+process.exit(123)
+
 let putCount = 0
 let getCount = 0
 let rssBase

@@ -3,6 +3,9 @@
 const BUFFERS = false
 const CHAINED = false
 
+// TODO (v2)
+process.exit(123)
+
 const testCommon = require('./common')
 const crypto = require('crypto')
 const assert = require('assert')

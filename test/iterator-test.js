@@ -1,6 +1,6 @@
 'use strict'
 
-const make = require('./make')
+const make = require('./make') // TODO (v2): no longer handles closing
 
 make('iterator optimized for seek', function (db, t, done) {
   const batch = db.batch()

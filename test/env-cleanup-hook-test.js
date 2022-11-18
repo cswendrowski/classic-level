@@ -15,7 +15,8 @@ addTest(['create', 'open', 'close'])
 addTest(['create', 'open-error'])
 
 function addTest (steps) {
-  test(`cleanup on environment exit (${steps.join(', ')})`, function (t) {
+  // TODO (v2)
+  false && test(`cleanup on environment exit (${steps.join(', ')})`, function (t) {
     t.plan(3)
 
     const child = fork(path.join(__dirname, 'env-cleanup-hook.js'), steps)
