@@ -1758,8 +1758,10 @@ struct NextWorker final : public BaseWorker {
 
   void HandleOKCallback (napi_env env, napi_deferred deferred) override {
     if (iterator_->aborted_) {
-      // TODO: set name to AbortError (see abstract-level)
       napi_value err = CreateCodeError(env, "LEVEL_ABORTED", "Operation has been aborted");
+      napi_value name;
+      napi_create_string_utf8(env, "AbortError", NAPI_AUTO_LENGTH, &name);
+      napi_set_named_property(env, err, "name", name);
       napi_reject_deferred(env, deferred, err);
       return;
     }
