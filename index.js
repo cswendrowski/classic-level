@@ -172,7 +172,7 @@ exports.ClassicLevel = ClassicLevel
 const encodingEnum = function (encoding) {
   if (encoding === 'buffer') return 0
   if (encoding === 'utf8') return 1
-  if (encoding === 'view') return 2
 
-  throw new Error(`Unknown encoding: ${encoding}`)
+  /* istanbul ignore else: should not happen */
+  if (encoding === 'view') return 2
 }
