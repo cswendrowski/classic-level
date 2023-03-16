@@ -15,8 +15,6 @@ jobs:
           - os: ubuntu-latest
             arch: x64
             build-group: linux-arm
-          - os: ubuntu-latest
-            arch: x64
     runs-on: ${{ matrix.os }}
     name: Build ${{ matrix.build-group }}
     env:
